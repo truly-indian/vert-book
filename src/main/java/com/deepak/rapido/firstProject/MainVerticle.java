@@ -13,12 +13,12 @@ public class MainVerticle extends AbstractVerticle {
   private final inMemoryBookStore store = new inMemoryBookStore();
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
-    System.out.println(store.getAll().encode());
+    //System.out.println(store.getAll().encode());
     Router books = Router.router(vertx);
     books.route().handler(BodyHandler.create());
     //This is the get all books router handler
     books.get("/books").handler(req -> req.response().putHeader(HttpHeaders.CONTENT_TYPE,HttpHeaderValues.APPLICATION_JSON)
-       .end(new JsonObject().put("1","book").encode()));
+       .end(store.getAll().encode()));
 
     //This is the Homepage router handler
     books.get("/").handler(req -> req.response().putHeader(HttpHeaders.CONTENT_TYPE,HttpHeaderValues.APPLICATION_JSON)
