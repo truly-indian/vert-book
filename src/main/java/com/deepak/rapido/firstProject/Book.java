@@ -13,11 +13,13 @@ public class Book {
   public String getTitle() {
     return title;
   }
-  public void setTitle(String title) {
+  public void setTitle(final String title) {
     this.title = title;
   }
-
-  public Book(long isbn, String title) {
+  public Book() {
+    //This is the default constructor
+  }
+  public Book(long isbn, final String title) {
     this.isbn = isbn;
     this.title = title;
   }

@@ -19,8 +19,35 @@ public class inMemoryBookStore {
     });
     return all;
   }
-
+  public void print(Book entry){
+    System.out.println(entry);
+  }
   public void add(final Book entry) {
-     books.put(entry.getIsbn(), entry);
+     books.put(entry.getIsbn(),entry);
+  }
+
+  public Book update(final String isbn, final Book entry) {
+    Long Key = Long.parseLong(isbn);
+    if(Key!= entry.getIsbn()) {
+      throw new IllegalArgumentException("Isbn Does not match(_:()");
+    }
+    books.put(Key,entry);
+    return entry;
+  }
+
+  public Book find(String isbn) {
+    Long Key = Long.parseLong(isbn);
+     Book ans = books.get(Key);
+     return ans;
+  }
+
+  public boolean delete(String isbn) {
+    Long Key = Long.parseLong(isbn);
+    Book ans = books.remove(Key);
+    if(ans!=null) {
+      return true;
+    }else {
+       return false;
+    }
   }
 }
